@@ -1,0 +1,27 @@
+{
+  "name": "pillar",
+  "version": "1.0.0",
+  "description": "Pencil Durability",
+  "main": "PencilDurability.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chrisyango/PillarPencilDurability.git"
+  },
+  "author": "Chris Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chrisyango/PillarPencilDurability/issues"
+  },
+  "homepage": "https://github.com/Chrisyango/PillarPencilDurability#readme"
+}
