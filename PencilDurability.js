@@ -2,7 +2,8 @@
 
 class Pencil {
   constructor() {
-    this.durability = 10;
+    this.durability = 2;
+    this.length = 10;
   }
   /* 
     As a writer
@@ -10,26 +11,8 @@ class Pencil {
     so that I can better remember my thoughts 
   */
   write(addToPaper, onPaper) {
-    // Check how many letters you can write with pencil
-    const letters = addToPaper.split('');
-    let availableLetters = '';
-    let i = 0;
-    while (this.durability !== 0) {
-      if (i === letters.length) {
-        break;
-      }
-      availableLetters += letters[i];
-      if (letters[i] === ' ') {
-        this.durability -= 0;
-      } else if (letters[i] !== letters[i].toUpperCase() || letters[i].match(/^[.,:!?]/)) {
-        this.durability -= 1;
-      } else if (letters[i] === letters[i].toUpperCase()) {
-        this.durability -= 2;
-      }
-      i += 1;
-    }
-
-    // Write the letters you can write with the pencil
+    let availableLetters = this.pointDegradation(addToPaper);
+    // Write the letters of the string you can write with the pencil
     if (onPaper) {
       return (`${onPaper} ${availableLetters}`);
     } else {
@@ -43,19 +26,43 @@ class Pencil {
     so that I can sell more pencils
   */
   pointDegradation(addToPaper) {
-    // Check pencil's durability
-    for (let i = 0; i < addToPaper.length; i++) {
-      // Durability stays the same if it's writing a space, decrease by 1 if writing a lower case letter or punctuation, and decrease by 2 if writing an upper case letter
-      if (addToPaper[i] === ' ') {
+    const letters = addToPaper.split('');
+    let availableLetters = '';
+    // When you reach the end of the string, get out of loop
+    for (let i = 0; i < letters.length; i++) {
+      // If durability ever reaches 0, sharpen pencil
+      if (this.durability === 0) {
+        this.sharpen();
+      }
+      if (this.durability === 0 && this.length === 0) {
+        break;
+      }
+      // Check how many letters of the string you can write with pencil
+      availableLetters += letters[i];
+      if (letters[i] === ' ') {
         this.durability -= 0;
-      } else if (addToPaper[i] !== addToPaper[i].toUpperCase() || addToPaper[i].match(/^[.,:!?]/)) {
+      } else if (letters[i] !== letters[i].toUpperCase() || letters[i].match(/^[.,:!?]/)) {
         this.durability -= 1;
-      } else {
+      } else if (letters[i] === letters[i].toUpperCase()) {
         this.durability -= 2;
       }
     }
 
-    return this.durability; 
+    return availableLetters;
+  }
+
+  /*
+    As a writer
+    I want to be able to sharpen my pencil
+    so that I can continue to write with it after it goes dull
+  */
+  sharpen() {
+    if (this.length === 0) {
+      throw new Error('Your pencil has a length and durability of 0! You need a new one!');
+    } else {
+      this.durability = 40000;
+      this.length -= 1;
+    }
   }
 }
 
