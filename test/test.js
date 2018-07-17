@@ -3,25 +3,44 @@
 const expect = require('chai').expect;
 const Pencil = require('../PencilDurability');
 
-const pencil = new Pencil();
-
 describe('write()', function() {
-  it('should write addToPaper with onPaper', function() {
-    let onPaper = 'She sells sea shells';
-    let addToPaper = 'by the sea shore';
-    let result = `${onPaper} ${addToPaper}`;
+  it('should write the correct amount of letters with onPaper', function() {
+    const pencil = new Pencil();
+    const onPaper = 'She sells sea shells';
+    const addToPaper = 'by the sea sh';
+    const expected = `${onPaper} ${addToPaper}`;
 
-    let test = pencil.write(addToPaper, onPaper);
+    const actual = pencil.write(addToPaper, onPaper);
 
-    expect(test).to.be.equal(result);
+    expect(actual).to.be.equal(expected);
   });
 
-  it('should only write addToPaper if onPaper is undefined', function() {
-    let addToPaper = 'by the sea shore';
-    let result = addToPaper;
+  it('should only write correct amount of letters if onPaper is undefined', function() {
+    const pencil = new Pencil();
+    const addToPaper = 'by the sea sh';
+    const expected = addToPaper;
 
-    let test = pencil.write(addToPaper);
+    const actual = pencil.write(addToPaper);
 
-    expect(test).to.be.equal(result);
+    expect(actual).to.be.equal(expected);
+  });
+
+  it('should return an error if addToPaper is undefined', function() {
+    const pencil = new Pencil();
+
+    expect(function() {
+      pencil.write();
+    }).to.throw('Cannot read property \'split\' of undefined');
+  });
+});
+
+describe('pointDegredation()', function() {
+  it('should display correct pencil durability after writing', function() {
+    const pencil = new Pencil();
+    const addToPaper = 'by the sea shore';
+
+    const test = pencil.pointDegradation(addToPaper);
+
+    expect(pencil.durability).to.be.equal(test);
   });
 });

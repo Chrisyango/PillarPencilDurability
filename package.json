@@ -6,13 +6,16 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "nyc": "^12.0.2"
+  },
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "cross-env NODE_ENV=test nyc mocha --exit"
   },
   "repository": {
     "type": "git",
