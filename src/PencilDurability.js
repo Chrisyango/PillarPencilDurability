@@ -10,11 +10,11 @@ class Pencil {
     I want to be able use a pencil to write text on a sheet of paper
     so that I can better remember my thoughts 
   */
-  write(whatToWriteOnPaper, writtenOnPaper = '') {
+  write(whatToWriteOnPaper, writtenOnPaper) {
     // Used to figure out what letters I can write
     let whatICanWrite = this.pointDegradation(whatToWriteOnPaper);
     // Write the letters of the string you can write with the pencil
-    if (onPaper) {
+    if (writtenOnPaper) {
       onPaper = `${writtenOnPaper} ${whatICanWrite}`;
     } else {
       onPaper = whatICanWrite;
@@ -73,7 +73,7 @@ class Pencil {
   erase(writtenOnPaper, whatToErase) {
     // Sets the length of spaces equal to the length of whatToErase
     let replaceWith = '';
-    for(let i = 0; i < whatToErase.length; i++) {
+    for(let i = 0; i < whatToErase.length - 2; i++) {
       replaceWith += ' ';
     }
 
@@ -82,7 +82,7 @@ class Pencil {
     // Get the beginning of the sentence up to where whatToErase starts
     const beginningOfSentence = writtenOnPaper.substring(0, lastIndexOf);
     // Get the end of the sentence where whatToErase ends
-    const endingOfSentence = writtenOnPaper.substring(lastIndexOf + replaceWith.length, writtenOnPaper.length);
+    const endingOfSentence = writtenOnPaper.substring(lastIndexOf + whatToErase.length, writtenOnPaper.length);
     // Combine the beginning, what to replace, and the end of the sentence
     onPaper = `${beginningOfSentence} ${replaceWith} ${endingOfSentence}`;
     return onPaper;
