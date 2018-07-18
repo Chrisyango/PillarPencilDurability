@@ -76,5 +76,23 @@ describe('Pencil Class', function() {
 
       expect(test).to.be.equal('She sells sea    lls');
     });
+
+    it('should erase the correct amount of letters from the sentence', function() {
+      pencil.eraserDurability = 2;
+
+      const test = pencil.erase(onPaper, 'she');
+
+      expect(test).to.be.equal('She sells sea s  lls');
+    });
+  });
+
+  describe('eraserDegradation()', function() {
+    it('should find the correct amount of letters that can be erased', function() {
+      pencil.eraserDurability = 2;
+
+      const test = pencil.eraserDegradation('she');
+
+      expect(test).to.be.equal('he');
+    });
   });
 });

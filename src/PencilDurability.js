@@ -73,7 +73,7 @@ class Pencil {
   */
   erase(writtenOnPaper, whatToErase) {
     // Figure out what I can erase
-    const whatICanErase = this.eraserDegredation(whatToErase);
+    const whatICanErase = this.eraserDegradation(whatToErase);
     // Sets the length of spaces equal to the length of whatToErase
     let replaceWith = '';
     for(let i = 0; i < whatICanErase.length - 2; i++) {
@@ -98,7 +98,7 @@ class Pencil {
     I want a pencil eraser to eventually wear out
     so that I can sell more pencils
   */
-  eraserDegredation(whatToErase) {
+  eraserDegradation(whatToErase) {
     let whatICanErase = '';
     // If whatToErase's length is greater than the eraser's durability, I have to find out whatICanErase
     if (whatToErase.length > this.eraserDurability) {
@@ -137,7 +137,7 @@ function main() {
 
   onPaper = 'How much wood would a woodchuck chuck if a woodchuck could chuck wood?';
   console.log(pencil.erase(onPaper, 'chuck'));
-  console.log(pencil.eraserDegredation('chuck'));
+  console.log(pencil.eraserDegradation('chuck'));
 }
 
 main();
