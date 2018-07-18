@@ -69,4 +69,12 @@ describe('Pencil Class', function() {
       expect(() => pencil.sharpen()).to.throw('Your pencil has a length and durability of 0! You need a new one!');
     });
   });
+
+  describe('erase()', function() {
+    it('should erase the last instance of selected text and replace it with spaces', function() {
+      const test = pencil.erase(onPaper, 'she');
+
+      expect(test).to.be.equal('She sells sea    lls');
+    });
+  });
 });
