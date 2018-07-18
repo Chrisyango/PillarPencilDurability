@@ -45,7 +45,7 @@ describe('Pencil Class', function() {
     });
   
     it('should display the correct amount of available letters if there is not enough point durability', function() {
-      pencil.durability = 4;
+      pencil.pencilDurability = 4;
       pencil.length = 0;
   
       const test = pencil.write(addToPaper);
@@ -56,10 +56,10 @@ describe('Pencil Class', function() {
   
   describe('sharpen()', function() {
     it('should set pencil durability to 40,000 and decrease pencil length by 1', function() {
-      pencil.durability = 20;
+      pencil.pencilDurability = 20;
       pencil.sharpen();
 
-      expect(pencil.durability).to.be.equal(40000);
+      expect(pencil.pencilDurability).to.be.equal(40000);
       expect(pencil.length).to.be.equal(9);
     });
 
