@@ -2,7 +2,7 @@
 
 class Pencil {
   constructor() {
-    this.durability = 2;
+    this.durability = 40000;
     this.length = 10;
   }
   /* 
@@ -32,7 +32,8 @@ class Pencil {
     for (let i = 0; i < letters.length; i++) {
       // If durability ever reaches 0, sharpen pencil
       if (this.durability === 0) {
-        this.sharpen();
+        console.log(`Your pencil has a durability of 0! You need to sharpen it! Here's what I've written "${availableLetters}".`);
+        break;
       }
       if (this.durability === 0 && this.length === 0) {
         break;
