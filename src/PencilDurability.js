@@ -2,7 +2,7 @@
 
 class Pencil {
   constructor() {
-    this.pencilDurability = 40000;
+    this.pointDurability = 40000;
     this.eraserDurability = 40000;
     this.length = 10;
   }
@@ -33,19 +33,19 @@ class Pencil {
     let whatICanWrite = '';
     // When you reach the end of the string, get out of loop
     for (let i = 0; i < letters.length; i++) {
-      // If pencilDurability ever reaches 0, sharpen pencil
-      if (this.pencilDurability === 0) {
+      // If pointDurability ever reaches 0, sharpen pencil
+      if (this.pointDurability === 0) {
         console.log(`Your pencil has a durability of 0! You need to sharpen it! Here's what I've written "${whatICanWrite}".`);
         break;
       }
       // Check how many letters of the string you can write with pencil
       whatICanWrite += letters[i];
       if (letters[i] === ' ') {
-        this.pencilDurability -= 0;
+        this.pointDurability -= 0;
       } else if (letters[i] !== letters[i].toUpperCase() || letters[i].match(/^[.,:!?]/)) {
-        this.pencilDurability -= 1;
+        this.pointDurability -= 1;
       } else if (letters[i] === letters[i].toUpperCase()) {
-        this.pencilDurability -= 2;
+        this.pointDurability -= 2;
       }
     }
 
@@ -61,7 +61,7 @@ class Pencil {
     if (this.length === 0) {
       throw new Error('Your pencil has a length and durability of 0! You need a new one!');
     } else {
-      this.pencilDurability = 40000;
+      this.pointDurability = 40000;
       this.length -= 1;
     }
   }
@@ -117,6 +117,36 @@ class Pencil {
     }
     return whatICanErase;
   }
+
+  /*
+    As a writer
+    I want to be able to edit previously written text
+    so that I can change my writing without starting over
+  */
+  edit(onPaper, wordToAdd) {
+    // Find where to insert the word
+    let whereToStart;
+    for(let i = 0; i < onPaper.length; i++) {
+      if (onPaper[i] === ' ' && onPaper[i + 1] === ' ') {
+        whereToStart = i + 1;
+        break;
+      }
+    }
+
+    // After finding out where to insert the word, switch all the blank spaces with the letters of the word you want to add
+    let splitOnPaper = onPaper.split('');
+    for(let i = 0; i < wordToAdd.length; i++) {
+      // If you word is too long and it tries to replace a non-blank space, replace it with @
+      if (splitOnPaper[whereToStart] !== ' ') {
+        splitOnPaper[whereToStart] = '@';
+      } else {
+        splitOnPaper[whereToStart] = wordToAdd[i];
+      }
+      whereToStart++;
+    }
+    onPaper = splitOnPaper.join('');
+    return onPaper;
+  }
 }
 
 let onPaper;
@@ -129,15 +159,17 @@ function main() {
   pencil.write(addToPaper, onPaper);
   console.log(onPaper);
   console.log(pencil.pointDegradation(addToPaper));
-  console.log(pencil.pencilDurability);
+  console.log(pencil.pointDurability);
   console.log(pencil.length);
   pencil.sharpen();
-  console.log(pencil.pencilDurability);
+  console.log(pencil.pointDurability);
   console.log(pencil.length);
 
   onPaper = 'How much wood would a woodchuck chuck if a woodchuck could chuck wood?';
   console.log(pencil.erase(onPaper, 'chuck'));
   console.log(pencil.eraserDegradation('chuck'));
+
+  console.log(pencil.edit(onPaper, 'hellothere'));
 }
 
 main();

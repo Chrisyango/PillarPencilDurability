@@ -3,8 +3,6 @@
 const expect = require('chai').expect;
 const Pencil = require('../src/PencilDurability');
 
-
-
 describe('Pencil Class', function() {
   let pencil;
   let onPaper;
@@ -31,7 +29,7 @@ describe('Pencil Class', function() {
     });
   
     it('should throw an error if addToPaper is undefined', function() {
-      expect(function() {
+      expect(() => {
         pencil.write();
       }).to.throw('Cannot read property \'split\' of undefined');
     });
@@ -43,9 +41,15 @@ describe('Pencil Class', function() {
   
       expect(addToPaper).to.be.equal(test);
     });
+
+    it('should subtract pointDurability by 1 if it is a lower case letter and by 2 if it is an upper case letter', function() {
+      pencil.pointDegradation('String I want to add.');
+      
+      expect(pencil.pointDurability).to.be.equal(39981);
+    });
   
     it('should display the correct amount of available letters if there is not enough point durability', function() {
-      pencil.pencilDurability = 4;
+      pencil.pointDurability = 4;
       pencil.length = 0;
   
       const test = pencil.write(addToPaper);
@@ -56,10 +60,10 @@ describe('Pencil Class', function() {
   
   describe('sharpen()', function() {
     it('should set pencil durability to 40,000 and decrease pencil length by 1', function() {
-      pencil.pencilDurability = 20;
+      pencil.pointDurability = 20;
       pencil.sharpen();
 
-      expect(pencil.pencilDurability).to.be.equal(40000);
+      expect(pencil.pointDurability).to.be.equal(40000);
       expect(pencil.length).to.be.equal(9);
     });
 
@@ -84,6 +88,12 @@ describe('Pencil Class', function() {
 
       expect(test).to.be.equal('She sells sea s  lls');
     });
+
+    it('should throw an error if an parameter is missing', function() {
+      expect(() => {
+        pencil.erase();
+      }).to.throw('Cannot read property \'length\' of undefined');
+    });
   });
 
   describe('eraserDegradation()', function() {
@@ -93,6 +103,32 @@ describe('Pencil Class', function() {
       const test = pencil.eraserDegradation('she');
 
       expect(test).to.be.equal('he');
+    });
+
+    it('should throw an error if an parameter is missing', function() {
+      expect(() => {
+        pencil.eraserDegradation();
+      }).to.throw('Cannot read property \'length\' of undefined');
+    });
+  });
+
+  describe('edit()', function() {
+    it('should find where to insert the word and insert it', function() {
+      const test = pencil.edit('This is a test. I will add a blank here       .', '"Test"');
+
+      expect(test).to.be.equal('This is a test. I will add a blank here "Test".');
+    });
+
+    it('should replace a letter with @ if it is not a blank space', function() {
+      const test = pencil.edit('Something to test   here.', 'destroy');
+
+      expect(test).to.be.equal('Something to test de@@@@@');
+    });
+
+    it('should throw an error if an parameter is missing', function() {
+      expect(() => {
+        pencil.edit();
+      }).to.throw('Cannot read property \'length\' of undefined');
     });
   });
 });
