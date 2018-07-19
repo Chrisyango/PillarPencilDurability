@@ -17,4 +17,6 @@ After installing Node.js and NPM, you'll need to install all of the dependancies
 
 First, you'll want to go into the folder where you downloaded the application.
 
-![Terminal cd](https://github.com/Chrisyango/PillarPencilDurability/blob/master/images/git-cd.png)
+![Terminal cd](https://github.com/Chrisyango/PillarPencilDurability/blob/master/images/git-cd.png "Terminal cd")
+
+Then all you have to do is run npm install.
