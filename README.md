@@ -20,3 +20,5 @@ First, you'll want to go into the folder where you downloaded the application.
 ![Terminal cd](https://github.com/Chrisyango/PillarPencilDurability/blob/master/images/git-cd.png "Terminal cd")
 
 Then all you have to do is run npm install.
+
+![Terminal cd](https://github.com/Chrisyango/PillarPencilDurability/blob/master/images/npm-install.png "npm install")
