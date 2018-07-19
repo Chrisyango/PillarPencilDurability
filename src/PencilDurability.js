@@ -13,7 +13,7 @@ class Pencil {
   */
   write(whatToWriteOnPaper, writtenOnPaper) {
     // Used to figure out what letters I can write
-    let whatICanWrite = this.pointDegradation(whatToWriteOnPaper);
+    const whatICanWrite = this.pointDegradation(whatToWriteOnPaper);
     // Write the letters of the string you can write with the pencil
     if (writtenOnPaper) {
       onPaper = `${writtenOnPaper} ${whatICanWrite}`;
@@ -156,19 +156,27 @@ function main() {
   onPaper = 'She sells sea shells';
   const addToPaper = 'down by the sea shore';
 
-  pencil.write(addToPaper, onPaper);
-  console.log(onPaper);
+  // Returns everything I've written on paper
+  console.log(pencil.write(addToPaper, onPaper));
+
+  // Returns what I can add to the paper
   console.log(pencil.pointDegradation(addToPaper));
+
+  // Returns pencil's pointDurability and length after sharpen
   console.log(pencil.pointDurability);
   console.log(pencil.length);
   pencil.sharpen();
   console.log(pencil.pointDurability);
   console.log(pencil.length);
 
+  // Returns what is on the paper minus the last instance of the word I want erased
   onPaper = 'How much wood would a woodchuck chuck if a woodchuck could chuck wood?';
   console.log(pencil.erase(onPaper, 'chuck'));
+
+  // Returns the amount of letters I can erase from what I want to erase and if my eraserDurability is at 0, it will return a message telling me that it is
   console.log(pencil.eraserDegradation('chuck'));
 
+  // Returns what is on the paper plus what I want to insert where there are multiple empty spaces. If the word collides with another word, it will display an @ symbol where it collides.
   console.log(pencil.edit(onPaper, 'hellothere'));
 }
 
