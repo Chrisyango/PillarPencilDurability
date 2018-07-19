@@ -34,3 +34,9 @@ Running the tests for the application are pretty simple. As with earlier, throug
 Then run npm test.
 
 `npm test`
+
+This will run the code
+
+`cross-env NODE_ENV=test nyc mocha --exit`
+
+which will run all of the tests written in the PencilDurabilityTest.js file.
